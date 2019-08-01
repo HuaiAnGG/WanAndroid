@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">WanAndroid</string>
+
+    <string name="action_home">主页</string>
+    <string name="action_system">体系</string>
+    <string name="action_navigation">导航</string>
+    <string name="action_project">项目</string>
+    <string name="usernameOrState">未登录</string>
+    <string name="navigationViewCollection">收藏</string>
+    <string name="navigationViewAboutAuthor">关于作者</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="function_not_found">功能开发ing~!</string>
+
+    <string name="article_title_hint_1">每日问答 Handler应该是大家再熟悉不过的类了，那么其中有个同步屏障机制，你了解多少呢？</string>
+    <string name="article_title_hint_2">一款适用经典蓝牙的快速开发框架</string>
+    <string name="article_title_hint_3">一行代码帮你搞定Android版本更新</string>
+    <string name="article_title_hint_4">AopArms一款基于AOP的Android注解框架</string>
+
+    <string name="article_author_hint_1">xiaoyang</string>
+    <string name="article_author_hint_2">AlexLiuSheng</string>
+    <string name="article_author_hint_3">teprinciple</string>
+    <string name="article_author_hint_4">AICareless</string>
+
+    <string name="article_tags_hint_1">问答</string>
+    <string name="article_tags_hint_2">项目</string>
+    <string name="article_tags_hint_3">项目</string>
+    <string name="article_tags_hint_4">项目</string>
+
+    <string name="article_date_hint_1">2019-07-23</string>
+    <string name="article_date_hint_2">2019–07-23</string>
+    <string name="article_date_hint_3">2019-07-23</string>
+    <string name="article_date_hint_4">2019-07-23</string>
+
+    <string name="article_des_hint_1">1. 首先至少要知道同步屏障机制是什么？2. 思考下，为什么要有这个机制？本周1/3，家有喜事，最近熬夜已懵逼。</string>
+    <string name="article_des_hint_2">本框架只适用于支持蓝牙3.0协议的设备进行数据连接传输，也就是通常说的经典蓝牙，通常手机与手机之间的连接都属于经典蓝牙模式范畴，
+        而一般连接外设耳机等设备，大多 属于BLE蓝牙（低功耗蓝牙），这两种蓝牙除了名字有相同之外，通信方式、原理、协议完全不一样。</string>
+    <string name="article_des_hint_3">Kotlin开发，支持AndroidX 、Md5签名验证、自定义UI、自动删除安装包、通知栏图片自定义；适配中英文，支持Android9.0 </string>
+    <string name="article_des_hint_4">AopArms编写了Android开发中常用的一套注解，如日志、异步处理、缓存、SP、延迟操作、定时任务、重试机制、try-catch安全机制、
+        过滤频繁点击、拦截等，后续还会有更多更强大的注解功能加入</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_view_collection"
+        android:icon="@drawable/ic_nav_item_collection"
+        android:title="@string/navigationViewCollection"/>
+
+    <item
+        android:id="@+id/navigation_view_about_author"
+        android:icon="@drawable/ic_nav_item_about_author"
+        android:title="@string/navigationViewAboutAuthor"/>
+</menu>
