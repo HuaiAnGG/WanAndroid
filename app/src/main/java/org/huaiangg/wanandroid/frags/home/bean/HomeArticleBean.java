@@ -1,4 +1,4 @@
-package org.huaiangg.wanandroid.frags.home;
+package org.huaiangg.wanandroid.frags.home.bean;
 
 import java.util.List;
 
@@ -41,6 +41,15 @@ public class HomeArticleBean {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeArticleBean{" +
+                "data=" + data +
+                ", errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                '}';
     }
 
     public static class DataBean {
@@ -124,6 +133,19 @@ public class HomeArticleBean {
             this.datas = datas;
         }
 
+        @Override
+        public String toString() {
+            return "ParentBean{" +
+                    "curPage=" + curPage +
+                    ", offset=" + offset +
+                    ", over=" + over +
+                    ", pageCount=" + pageCount +
+                    ", size=" + size +
+                    ", total=" + total +
+                    ", datas=" + datas +
+                    '}';
+        }
+
         public static class dataList {
             /**
              * apkLink :
@@ -175,6 +197,37 @@ public class HomeArticleBean {
             private int userId;
             private int visible;
             private int zan;
+
+            @Override
+            public String toString() {
+                return "dataList{" +
+                        "apkLink='" + apkLink + '\'' +
+                        ", author='" + author + '\'' +
+                        ", chapterId=" + chapterId +
+                        ", chapterName='" + chapterName + '\'' +
+                        ", collect=" + collect +
+                        ", courseId=" + courseId +
+                        ", desc='" + desc + '\'' +
+                        ", envelopePic='" + envelopePic + '\'' +
+                        ", fresh=" + fresh +
+                        ", id=" + id +
+                        ", link='" + link + '\'' +
+                        ", niceDate='" + niceDate + '\'' +
+                        ", origin='" + origin + '\'' +
+                        ", prefix='" + prefix + '\'' +
+                        ", projectLink='" + projectLink + '\'' +
+                        ", publishTime=" + publishTime +
+                        ", superChapterId=" + superChapterId +
+                        ", superChapterName='" + superChapterName + '\'' +
+                        ", title='" + title + '\'' +
+                        ", type=" + type +
+                        ", userId=" + userId +
+                        ", visible=" + visible +
+                        ", zan=" + zan +
+                        ", tags=" + tags +
+                        '}';
+            }
+
             private List<TagsBean> tags;
 
             public String getApkLink() {

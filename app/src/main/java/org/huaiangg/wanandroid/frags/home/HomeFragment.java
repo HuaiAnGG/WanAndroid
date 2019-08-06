@@ -2,9 +2,11 @@ package org.huaiangg.wanandroid.frags.home;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,14 +15,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.activities.BannerContentActivity;
-import org.huaiangg.wanandroid.frags.bean.BannerBean;
+import org.huaiangg.wanandroid.frags.home.bean.BannerBean;
 import org.huaiangg.wanandroid.frags.home.adapter.HomeArticleAdapter;
+import org.huaiangg.wanandroid.frags.home.bean.HomeArticleBean;
 import org.huaiangg.wanandroid.frags.home.loder.GlideImageLoder;
 import org.huaiangg.wanandroid.network.RetrofitUtil;
 import org.huaiangg.wanandroid.utils.ToastUtil;
@@ -35,12 +42,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * 首页
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  *
  * @author huaian
  */
-public class HomeFragment extends Fragment implements OnBannerListener, RecyclerView.RecyclerListener {
+@RequiresApi(api = Build.VERSION_CODES.M)
+public class HomeFragment extends Fragment
+        implements OnBannerListener, RecyclerView.RecyclerListener {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
 
@@ -50,13 +60,28 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
     private List<String> imageTitle = new ArrayList<>();
     private List<String> imageUrl = new ArrayList<>();
     private RecyclerView articleRecyclerView;
-    private static int PAGE_NUM = 1;
+    private SmartRefreshLayout smartRefreshLayout;
+
+    private List<HomeArticleBean.DataBean.dataList> articleList = new ArrayList<>();
+    private HomeArticleAdapter homeArticleAdapter;
+    /**
+     * 当前页面下标
+     */
+    private volatile static int PAGE_NUM = 1;
+    /**
+     * 判断页面状态
+     * 0 --->>  默认刷新
+     * 1 --->>  下拉刷新
+     * 2 --->>  上拉加载
+     */
+    private volatile static int REFRESH_STATE = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 初始化，确保挂起、回退都不会重新初始化
         PAGE_NUM = 1;
+        REFRESH_STATE = 0;
     }
 
     @Override
@@ -78,6 +103,7 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
         // 初始化组件
         banner = view.findViewById(R.id.banner);
         articleRecyclerView = view.findViewById(R.id.home_article);
+        smartRefreshLayout = view.findViewById(R.id.home_smart_refresh_layout);
 
         // 监听事件绑定
         banner.setOnBannerListener(this);
@@ -86,11 +112,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
         // 配置 recyclerView
         articleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        // 获取文章实体
-        HomeArticleBean articleList = getArticleList(PAGE_NUM);
-        articleRecyclerView.setAdapter(new HomeArticleAdapter(articleList));
+        getArticleList(PAGE_NUM);
         articleRecyclerView.setRecyclerListener(this);
     }
+
 
     /**
      * banner 初始化 banner
@@ -111,9 +136,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
 
     /**
      * 获取文章列表
+     *
+     * @param pageNum 页码
      */
-    private HomeArticleBean getArticleList(int pageNum) {
-        final HomeArticleBean[] articleBean = {null};
+    private void getArticleList(int pageNum) {
         RetrofitUtil.getInstance().getApiService()
                 .getHomeArticleListData(pageNum)
                 .subscribeOn(Schedulers.io())
@@ -126,12 +152,17 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
 
                     @Override
                     public void onNext(HomeArticleBean bean) {
-                        if (bean.getData() == null) {
-                            Log.e(TAG, "onNext: " + bean.getErrorMsg());
-                            ToastUtil.showLongToast(getContext(), bean.getErrorMsg());
-                            return;
+                        if (REFRESH_STATE != 2) {
+                            articleList.clear();
                         }
-                        articleBean[0] = bean;
+                        PAGE_NUM = bean.getData().getCurPage();
+                        // 复制 list
+                        articleList.addAll(bean.getData().getDatas());
+                        homeArticleAdapter = new HomeArticleAdapter(articleList);
+                        articleRecyclerView.setAdapter(homeArticleAdapter);
+                        homeArticleAdapter.notifyDataSetChanged();
+                        // 设置刷新监听
+                        setRefreshListener();
                     }
 
                     @Override
@@ -142,10 +173,38 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
                     @Override
                     public void onComplete() {
                         Log.i(TAG, "onComplete: 完成文章列表请求！");
-
                     }
                 });
-        return articleBean[0];
+    }
+
+    /**
+     * 上拉加载，下拉刷新监听
+     */
+    private void setRefreshListener() {
+        // 下拉刷新
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                ToastUtil.showShortToast(getContext(), "刷新成功");
+                // 设置下拉时长
+                refreshLayout.finishRefresh(1500);
+                REFRESH_STATE = 1;
+                PAGE_NUM = 1;
+                getArticleList(PAGE_NUM);
+            }
+        });
+
+        // 上拉加载
+        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                ToastUtil.showShortToast(getContext(), "加载成功");
+                // 设置上拉时长
+                refreshLayout.finishLoadMore(1500);
+                REFRESH_STATE = 2;
+                getArticleList(PAGE_NUM);
+            }
+        });
     }
 
     /**

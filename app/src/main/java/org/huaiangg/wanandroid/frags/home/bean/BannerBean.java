@@ -1,4 +1,4 @@
-package org.huaiangg.wanandroid.frags.bean;
+package org.huaiangg.wanandroid.frags.home.bean;
 
 import java.util.List;
 
@@ -148,7 +148,7 @@ public class BannerBean {
 
         @Override
         public String toString() {
-            return "DataBean{" +
+            return "ParentBean{" +
                     "desc='" + desc + '\'' +
                     ", id=" + id +
                     ", imagePath='" + imagePath + '\'' +

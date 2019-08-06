@@ -1,5 +1,7 @@
 package org.huaiangg.wanandroid.frags.home.adapter;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +13,9 @@ import android.widget.TextView;
 
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.frags.home.HomeFragment;
-import org.huaiangg.wanandroid.frags.home.HomeArticleBean;
+import org.huaiangg.wanandroid.frags.home.bean.HomeArticleBean;
+
+import java.util.List;
 
 /**
  * @description: 首页 -->> 文章适配器
@@ -21,12 +25,13 @@ import org.huaiangg.wanandroid.frags.home.HomeArticleBean;
 public class HomeArticleAdapter
         extends RecyclerView.Adapter<HomeArticleAdapter.HomeArticleViewHolder> {
 
-    private HomeArticleBean articleBean;
+    private List<HomeArticleBean.DataBean.dataList> dataListList;
 
-    public HomeArticleAdapter(HomeArticleBean articleBean) {
-        this.articleBean = articleBean;
+    public HomeArticleAdapter(List<HomeArticleBean.DataBean.dataList> data) {
+        this.dataListList = data;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @NonNull
     @Override
     public HomeArticleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -40,21 +45,21 @@ public class HomeArticleAdapter
     public void onBindViewHolder(@NonNull HomeArticleViewHolder holder, int position) {
         // 固定值
         holder.articleAuthorAvatar.setImageResource(R.drawable.default_portrait);
-        holder.articleAuthor.setText(articleBean.getData().getDatas().get(position).getAuthor());
-        holder.articleTitle.setText(articleBean.getData().getDatas().get(position).getTitle());
-        holder.articleTags.setText(articleBean.getData().getDatas().get(position).getSuperChapterName());
-        String temp = articleBean.getData().getDatas().get(position).getDesc();
+        holder.articleAuthor.setText(dataListList.get(position).getAuthor());
+        holder.articleTitle.setText(dataListList.get(position).getTitle());
+        holder.articleTags.setText(dataListList.get(position).getSuperChapterName());
+        String temp = dataListList.get(position).getDesc();
         if (temp.isEmpty()) {
-            holder.articleDes.setText(articleBean.getData().getDatas().get(position).getTitle());
+            holder.articleDes.setText(dataListList.get(position).getTitle());
         }else{
             holder.articleDes.setText(temp);
         }
-        holder.articleUpdateTime.setText(articleBean.getData().getDatas().get(position).getNiceDate());
+        holder.articleUpdateTime.setText(dataListList.get(position).getNiceDate());
     }
 
     @Override
     public int getItemCount() {
-        return articleBean != null ? articleBean.getData().getSize() : 0;
+        return dataListList != null ? dataListList.size() : 0;
     }
 
     class HomeArticleViewHolder extends RecyclerView.ViewHolder {

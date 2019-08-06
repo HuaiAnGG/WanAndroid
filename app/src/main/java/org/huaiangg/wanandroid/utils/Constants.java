@@ -21,4 +21,9 @@ public class Constants {
      * 首页 -->> 文章
      */
     public static final String HOME_ARTICLE_URL = "/article/list/1/json";
+
+    /**
+     * 体系 --->> 文章导航
+     */
+    public static final String SYSTEM_ARTICLE_NAVIGATION_URL = "/tree/json";
 }
