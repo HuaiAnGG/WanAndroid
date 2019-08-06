@@ -6,6 +6,8 @@ import org.huaiangg.wanandroid.utils.Constants;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 /**
  * @description: 网络请求接口
@@ -25,6 +27,6 @@ public interface ApiService {
      * 文章列表接口
      * @return
      */
-    @GET(Constants.HOME_ARTICLE_URL)
-    Observable<HomeArticleBean> getHomeArticleListData();
+    @GET("/article/list/{pageNum}/json")
+    Observable<HomeArticleBean> getHomeArticleListData(@Path("pageNum") int pageNum);
 }

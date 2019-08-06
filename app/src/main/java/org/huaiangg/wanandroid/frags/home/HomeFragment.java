@@ -1,4 +1,4 @@
-package org.huaiangg.wanandroid.frags;
+package org.huaiangg.wanandroid.frags.home;
 
 
 import android.content.Intent;
@@ -20,7 +20,6 @@ import com.youth.banner.listener.OnBannerListener;
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.activities.BannerContentActivity;
 import org.huaiangg.wanandroid.frags.bean.BannerBean;
-import org.huaiangg.wanandroid.frags.home.HomeArticleBean;
 import org.huaiangg.wanandroid.frags.home.adapter.HomeArticleAdapter;
 import org.huaiangg.wanandroid.frags.home.loder.GlideImageLoder;
 import org.huaiangg.wanandroid.network.RetrofitUtil;
@@ -51,10 +50,13 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
     private List<String> imageTitle = new ArrayList<>();
     private List<String> imageUrl = new ArrayList<>();
     private RecyclerView articleRecyclerView;
+    private static int PAGE_NUM = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 初始化，确保挂起、回退都不会重新初始化
+        PAGE_NUM = 1;
     }
 
     @Override
@@ -84,8 +86,9 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
         // 配置 recyclerView
         articleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        // 获取文章链接
-        getArticleList();
+        // 获取文章实体
+        HomeArticleBean articleList = getArticleList(PAGE_NUM);
+        articleRecyclerView.setAdapter(new HomeArticleAdapter(articleList));
         articleRecyclerView.setRecyclerListener(this);
     }
 
@@ -109,9 +112,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
     /**
      * 获取文章列表
      */
-    private void getArticleList() {
+    private HomeArticleBean getArticleList(int pageNum) {
+        final HomeArticleBean[] articleBean = {null};
         RetrofitUtil.getInstance().getApiService()
-                .getHomeArticleListData()
+                .getHomeArticleListData(pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeArticleBean>() {
@@ -122,17 +126,12 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
 
                     @Override
                     public void onNext(HomeArticleBean bean) {
-//                        if (bean.getErrorCode() != 0) {
-//                            Log.e(TAG, "onNext: " + bean.getErrorMsg() );
-//                            ToastUtil.showLongToast(getContext(), bean.getErrorMsg());
-//                            return;
-//                        }
                         if (bean.getData() == null) {
                             Log.e(TAG, "onNext: " + bean.getErrorMsg());
                             ToastUtil.showLongToast(getContext(), bean.getErrorMsg());
                             return;
                         }
-                        articleRecyclerView.setAdapter(new HomeArticleAdapter(bean));
+                        articleBean[0] = bean;
                     }
 
                     @Override
@@ -143,8 +142,10 @@ public class HomeFragment extends Fragment implements OnBannerListener, Recycler
                     @Override
                     public void onComplete() {
                         Log.i(TAG, "onComplete: 完成文章列表请求！");
+
                     }
                 });
+        return articleBean[0];
     }
 
     /**

@@ -16,10 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.huaiangg.wanandroid.frags.HomeFragment;
+import org.huaiangg.wanandroid.frags.home.HomeFragment;
 import org.huaiangg.wanandroid.frags.NavigationFragment;
 import org.huaiangg.wanandroid.frags.ProjectFragment;
-import org.huaiangg.wanandroid.frags.SystemFragment;
+import org.huaiangg.wanandroid.frags.system.SystemFragment;
 import org.huaiangg.wanandroid.utils.ToastUtil;
 
 /**

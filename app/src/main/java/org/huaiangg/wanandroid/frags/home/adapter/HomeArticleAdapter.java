@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.huaiangg.wanandroid.R;
-import org.huaiangg.wanandroid.frags.HomeFragment;
+import org.huaiangg.wanandroid.frags.home.HomeFragment;
 import org.huaiangg.wanandroid.frags.home.HomeArticleBean;
-
-import java.util.Objects;
 
 /**
  * @description: 首页 -->> 文章适配器
