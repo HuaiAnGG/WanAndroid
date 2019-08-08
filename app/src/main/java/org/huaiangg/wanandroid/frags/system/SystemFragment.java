@@ -83,6 +83,7 @@ public class SystemFragment extends Fragment {
                 .subscribe(new Observer<SystemArticleBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
