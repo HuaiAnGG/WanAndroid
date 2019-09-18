@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.frags.home.HomeFragment;
+import org.huaiangg.wanandroid.frags.home.ItemOnClickLister;
 import org.huaiangg.wanandroid.frags.home.bean.HomeArticleBean;
 
 import java.util.List;
@@ -26,9 +27,14 @@ public class HomeArticleAdapter
         extends RecyclerView.Adapter<HomeArticleAdapter.HomeArticleViewHolder> {
 
     private List<HomeArticleBean.DataBean.dataList> dataListList;
+    private ItemOnClickLister onItemClickListener;
 
     public HomeArticleAdapter(List<HomeArticleBean.DataBean.dataList> data) {
         this.dataListList = data;
+    }
+
+    public void setOnItemClickListener(ItemOnClickLister onItemClickListener ){
+        this. onItemClickListener=onItemClickListener;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -55,6 +61,15 @@ public class HomeArticleAdapter
             holder.articleDes.setText(temp);
         }
         holder.articleUpdateTime.setText(dataListList.get(position).getNiceDate());
+
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onClick(position);
+                }
+            });
+        }
     }
 
     @Override

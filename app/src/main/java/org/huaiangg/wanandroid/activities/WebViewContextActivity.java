@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,8 +14,9 @@ import org.huaiangg.wanandroid.R;
 /**
  * @author huaian
  */
-public class BannerContentActivity extends AppCompatActivity {
+public class WebViewContextActivity extends AppCompatActivity {
 
+    private static final String TAG = WebViewContextActivity.class.getSimpleName();
     private WebView webView;
     private String url;
 
@@ -23,7 +25,8 @@ public class BannerContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner_content);
 
-        url = getIntent().getStringExtra("bannerImageUrl");
+        url = getIntent().getStringExtra("webViewUrl");
+        Log.d(TAG, "onCreate: " + url);
         initView();
     }
 

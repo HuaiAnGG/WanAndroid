@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.BannerContentActivity"
+        <activity android:name=".activities.WebViewContextActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".MainActivity"
             android:launchMode="singleTop">

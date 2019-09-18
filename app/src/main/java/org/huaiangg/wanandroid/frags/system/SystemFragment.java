@@ -89,7 +89,7 @@ public class SystemFragment extends Fragment {
                     @Override
                     public void onNext(SystemArticleBean bean) {
                         Log.d(TAG, "onNext: " + bean.getData().toString());
-                        int len = bean.getData().size();
+                        int len = bean.getData().getSize();
                         for (int i = 0; i < len; i++) {
 
                         }

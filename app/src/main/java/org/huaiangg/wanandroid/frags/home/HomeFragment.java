@@ -24,7 +24,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.huaiangg.wanandroid.R;
-import org.huaiangg.wanandroid.activities.BannerContentActivity;
+import org.huaiangg.wanandroid.activities.WebViewContextActivity;
 import org.huaiangg.wanandroid.frags.home.bean.BannerBean;
 import org.huaiangg.wanandroid.frags.home.adapter.HomeArticleAdapter;
 import org.huaiangg.wanandroid.frags.home.bean.HomeArticleBean;
@@ -49,8 +49,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author huaian
  */
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class HomeFragment extends Fragment
-        implements OnBannerListener, RecyclerView.RecyclerListener {
+public class HomeFragment extends Fragment implements OnBannerListener {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
 
@@ -113,7 +112,6 @@ public class HomeFragment extends Fragment
         articleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
         getArticleList(PAGE_NUM);
-        articleRecyclerView.setRecyclerListener(this);
     }
 
 
@@ -163,6 +161,8 @@ public class HomeFragment extends Fragment
                         homeArticleAdapter.notifyDataSetChanged();
                         // 设置刷新监听
                         setRefreshListener();
+
+                        homeArticleAdapter.setOnItemClickListener(itemOnClickLister);
                     }
 
                     @Override
@@ -176,6 +176,19 @@ public class HomeFragment extends Fragment
                     }
                 });
     }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d(TAG, "View.OnClickListener :  点击事件");
+            RecyclerView.ViewHolder viewHolder = articleRecyclerView.getChildViewHolder(view);
+            int position = viewHolder.getAdapterPosition();
+            // 转跳设置
+            Intent intent = new Intent(getContext(), WebViewContextActivity.class);
+            intent.putExtra("webViewUrl", articleList.get(position).getLink());
+            Objects.requireNonNull(getContext()).startActivity(intent);
+        }
+    };
 
     /**
      * 上拉加载，下拉刷新监听
@@ -296,15 +309,32 @@ public class HomeFragment extends Fragment
         return fragment;
     }
 
+    /**
+     * banner 点击事件
+     * @param position pos
+     */
     @Override
     public void OnBannerClick(int position) {
-        Intent intent = new Intent(getContext(), BannerContentActivity.class);
-        intent.putExtra("bannerImageUrl", getImageUrl().get(position));
+        Intent intent = new Intent(getContext(), WebViewContextActivity.class);
+        intent.putExtra("webViewUrl", getImageUrl().get(position));
         Objects.requireNonNull(getContext()).startActivity(intent);
     }
 
-    @Override
-    public void onViewRecycled(@NonNull RecyclerView.ViewHolder viewHolder) {
-        viewHolder.getAdapterPosition();
-    }
+    /**
+     * 文章列表点击事件
+     */
+    private ItemOnClickLister itemOnClickLister = new ItemOnClickLister() {
+        @Override
+        public void onClick(int position) {
+            // 转跳设置
+            Intent intent = new Intent(getContext(), WebViewContextActivity.class);
+            intent.putExtra("webViewUrl", articleList.get(position).getLink());
+            Objects.requireNonNull(getContext()).startActivity(intent);
+        }
+
+        @Override
+        public void onLongClick(int position) {
+
+        }
+    };
 }
