@@ -10,15 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.network.RetrofitUtil;
+import org.huaiangg.wanandroid.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,8 +45,13 @@ public class SystemFragment extends Fragment {
     private Spinner childSpinner;
     private RecyclerView rvSystemArticle;
 
-    private Map<String, Integer> parentChapterInfo = new HashMap<>();
-    private List<Map<String, Integer>> parentChapterInfoList = new ArrayList<>();
+    private ArrayAdapter<String> parentAdapter;
+    private ArrayAdapter<String> childAdapter;
+//    private ArrayList<String> spinnerParentList = new ArrayList<String>();
+//    private ArrayList<String> spinnerChildList = new ArrayList<String>();
+
+    private Map<String, Integer> spinnerParentMap = new HashMap<>();
+    private Map<String, Integer> spinnerChildMap = new HashMap<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +80,10 @@ public class SystemFragment extends Fragment {
 
         // 获取文章列表导航数据
         getSystemArticleNavigationSpinner();
+
+        // 监听事件绑定
+        parentSpinner.setOnItemSelectedListener(parentSpinnerItemSelectedListener);
+        childSpinner.setOnItemSelectedListener(childSpinnerItemSelectedListener);
     }
 
     /**
@@ -83,16 +97,41 @@ public class SystemFragment extends Fragment {
                 .subscribe(new Observer<SystemArticleBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        Log.e(TAG, "onComplete: 发起体系文章导航请求！" );
                     }
 
                     @Override
                     public void onNext(SystemArticleBean bean) {
                         Log.d(TAG, "onNext: " + bean.getData().toString());
-                        int len = bean.getData().getSize();
+                        int len = bean.getData().size();
                         for (int i = 0; i < len; i++) {
-
+                            String parentName = bean.getData().get(i).getName();
+                            int chapterId = bean.getData().get(i).getParentChapterId();
+                            Log.d(TAG, "onNext: " + parentName);
+//                            spinnerParentList.add(parentName);
+                            spinnerParentMap.put(parentName, chapterId);
                         }
+                        for (int i = 0; i < bean.getData().get(0).getChildren().size(); i++) {
+                            String childName = bean.getData().get(i).getChildren().get(0).getName();
+                            int id = bean.getData().get(i).getChildren().get(0).getId();
+                            Log.d(TAG, "onNext: " + childName);
+//                            spinnerChildList.add(childName);
+                            spinnerChildMap.put(childName, id);
+                        }
+
+                        // 一级目录
+                        parentAdapter = new ArrayAdapter<String>(
+                                Objects.requireNonNull(getContext()),
+                                android.R.layout.simple_spinner_item,
+                                new ArrayList<String>(spinnerParentMap.keySet())
+                        );
+
+                        // 二级目录
+                        childAdapter = new ArrayAdapter<String>(
+                                Objects.requireNonNull(getContext()),
+                                android.R.layout.simple_spinner_item,
+                                new ArrayList<>(spinnerChildMap.keySet())
+                        );
                     }
 
                     @Override
@@ -103,7 +142,43 @@ public class SystemFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         Log.e(TAG, "onComplete: 完成体系文章导航请求！" );
+                        parentSpinner.setAdapter(parentAdapter);
+                        childSpinner.setAdapter(childAdapter);
                     }
                 });
     }
+
+    /**
+     * 一级目录 spinner 事件选中监听
+     */
+    private Spinner.OnItemSelectedListener parentSpinnerItemSelectedListener
+            = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+            ToastUtil.showShortToast(getContext(),
+                    "一级目录选中了 ：" + new ArrayList<>(spinnerParentMap.keySet()).get(pos));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
+
+    /**
+     * 二级目录 spinner 事件选中监听
+     */
+    private Spinner.OnItemSelectedListener childSpinnerItemSelectedListener
+            = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+            ToastUtil.showShortToast(getContext(),
+                    "二级目录选中了 ：" + new ArrayList<>(spinnerChildMap.keySet()).get(pos));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
 }

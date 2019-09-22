@@ -2,42 +2,36 @@ package org.huaiangg.wanandroid.frags.system;
 
 import java.util.List;
 
+/**
+ * @author huaian
+ */
 public class SystemArticleBean {
 
+
     /**
-     * data : {"curPage":2,"datas":[{"apkLink":"","audit":1,"author":"星星y","chapterId":486,
-     * "chapterName":"LiveData","collect":false,"courseId":13,"desc":"","envelopePic":"",
-     * "fresh":false,"id":9104,"link":"https://www.jianshu.com/p/34fb6ffaa684",
-     * "niceDate":"2019-09-09","niceShareDate":"未知时间","origin":"","prefix":"","projectLink":"",
-     * "publishTime":1568043858000,"shareDate":null,"shareUser":"","superChapterId":423,
-     * "superChapterName":"Jetpack","tags":[],"title":"LiveData+Retrofit网络请求实战","type":0,
-     * "userId":-1,"visible":1,"zan":0},{"apkLink":"","audit":1,"author":"yukilzw","chapterId":402,
-     * "chapterName":"跨平台应用","collect":false,"courseId":13,
-     * "desc":"包含功能： - 开播列表上拉加载、下拉刷新 - 渐进式导航头部 - 封装HTTP、IO缓存操作 - 页面路由传值
-     * - bloc全局状态管理 - 礼物横幅动画队列 - 弹幕消息滚动 - 静态视频流 - 九宫格抽奖游戏 - 照片选择
-     * - 全屏、窗口webView - ...（持续增加中）",
-     * "envelopePic":"https://www.wanandroid.com/blogimgs/ffb41ede-7f1d-4368-beb8-e9ccc0422902.png",
-     * "fresh":false,"id":9101,"link":"http://www.wanandroid.com/blog/show/2670","niceDate":"2019-09-09",
-     * "niceShareDate":"未知时间","origin":"","prefix":"","projectLink":"https://github.com/yukilzw/dy_flutter",
-     * "publishTime":1568043629000,"shareDate":null,"shareUser":"","superChapterId":294,
-     * "superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=402"}],
-     * "title":"使用flutter重构斗鱼APP - dy_flutter","type":0,"userId":-1,"visible":1,"zan":0}],
-     * "offset":20,"over":false,"pageCount":358,"size":20,"total":7143}
+     * data : [{"children":[{"children":[],"courseId":13,"id":60,"name":"Android Studio相关",
+     * "order":1000,"parentChapterId":150,"userControlSetTop":false,"visible":1},{"children":[],
+     * "courseId":13,"id":169,"name":"gradle","order":1001,"parentChapterId":150,
+     * "userControlSetTop":false,"visible":1},{"children":[],"courseId":13,
+     * "id":495,"name":"booster","order":220009,"parentChapterId":460,"userControlSetTop":false,
+     * "visible":1}],"courseId":13,"id":460,"name":"常见开源库源码解析","order":220,"parentChapterId":0,
+     * "userControlSetTop":false,"visible":1},{"children":[{"children":[],"courseId":13,"id":463,
+     * "name":"掘金翻译计划","order":225000,"parentChapterId":462,"userControlSetTop":false,"visible":1
+     * }],"courseId":13,"id":462,"name":"翻译","order":225,"parentChapterId":0,
+     * "userControlSetTop":false,"visible":1},{"children":[{"children":[],"courseId":13,"id":470,
+     * "name":"协程","order":230000,"parentChapterId":469,"userControlSetTop":false,"visible":1}],
+     * "courseId":13,"id":469,"name":"Kotlin","order":230,"parentChapterId":0,
+     * "userControlSetTop":false,"visible":1},{"children":[{"children":[],"courseId":13,"id":494,
+     * "name":"广场","order":235000,"parentChapterId":493,"userControlSetTop":false,"visible":1}],
+     * "courseId":13,"id":493,"name":"广场Tab","order":235,"parentChapterId":0,
+     * "userControlSetTop":false,"visible":1}]
      * errorCode : 0
      * errorMsg :
      */
 
-    private DataBean data;
     private int errorCode;
     private String errorMsg;
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
+    private List<DataBean> data;
 
     public int getErrorCode() {
         return errorCode;
@@ -55,189 +49,123 @@ public class SystemArticleBean {
         this.errorMsg = errorMsg;
     }
 
+    public List<DataBean> getData() {
+        return data;
+    }
+
+    public void setData(List<DataBean> data) {
+        this.data = data;
+    }
+
     public static class DataBean {
         /**
-         * curPage : 2
-         * datas : [{"apkLink":"","audit":1,"author":"星星y","chapterId":486,"chapterName":"LiveData","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":9104,"link":"https://www.jianshu.com/p/34fb6ffaa684","niceDate":"2019-09-09","niceShareDate":"未知时间","origin":"","prefix":"","projectLink":"","publishTime":1568043858000,"shareDate":null,"shareUser":"","superChapterId":423,"superChapterName":"Jetpack","tags":[],"title":"LiveData+Retrofit网络请求实战","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","audit":1,"author":"yukilzw","chapterId":402,"chapterName":"跨平台应用","collect":false,"courseId":13,"desc":"包含功能： - 开播列表上拉加载、下拉刷新 - 渐进式导航头部 - 封装HTTP、IO缓存操作 - 页面路由传值 - bloc全局状态管理 - 礼物横幅动画队列 - 弹幕消息滚动 - 静态视频流 - 九宫格抽奖游戏 - 照片选择 - 全屏、窗口webView - ...（持续增加中）","envelopePic":"https://www.wanandroid.com/blogimgs/ffb41ede-7f1d-4368-beb8-e9ccc0422902.png","fresh":false,"id":9101,"link":"http://www.wanandroid.com/blog/show/2670","niceDate":"2019-09-09","niceShareDate":"未知时间","origin":"","prefix":"","projectLink":"https://github.com/yukilzw/dy_flutter","publishTime":1568043629000,"shareDate":null,"shareUser":"","superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=402"}],"title":"使用flutter重构斗鱼APP - dy_flutter","type":0,"userId":-1,"visible":1,"zan":0}]
-         * offset : 20
-         * over : false
-         * pageCount : 358
-         * size : 20
-         * total : 7143
+         * children : [{"children":[],"courseId":13,"id":60,"name":"Android Studio相关",
+         * "order":1000,"parentChapterId":150,"userControlSetTop":false,"visible":1},{"children
+         * ":[],"courseId":13,"id":169,"name":"gradle","order":1001,"parentChapterId":150,
+         * "userControlSetTop":false,"visible":1},{"children":[],"courseId":13,"id":269,
+         * "name":"官方发布","order":1002,"parentChapterId":150,"userControlSetTop":false,"visible":1}]
+         * courseId : 13
+         * id : 150
+         * name : 开发环境
+         * order : 1
+         * parentChapterId : 0
+         * userControlSetTop : false
+         * visible : 1
          */
 
-        private int curPage;
-        private int offset;
-        private boolean over;
-        private int pageCount;
-        private int size;
-        private int total;
-        private List<DatasBean> datas;
+        private int courseId;
+        private int id;
+        private String name;
+        private int order;
+        private int parentChapterId;
+        private boolean userControlSetTop;
+        private int visible;
+        private List<ChildrenBean> children;
 
-        public int getCurPage() {
-            return curPage;
+        public int getCourseId() {
+            return courseId;
         }
 
-        public void setCurPage(int curPage) {
-            this.curPage = curPage;
+        public void setCourseId(int courseId) {
+            this.courseId = courseId;
         }
 
-        public int getOffset() {
-            return offset;
+        public int getId() {
+            return id;
         }
 
-        public void setOffset(int offset) {
-            this.offset = offset;
+        public void setId(int id) {
+            this.id = id;
         }
 
-        public boolean isOver() {
-            return over;
+        public String getName() {
+            return name;
         }
 
-        public void setOver(boolean over) {
-            this.over = over;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public int getPageCount() {
-            return pageCount;
+        public int getOrder() {
+            return order;
         }
 
-        public void setPageCount(int pageCount) {
-            this.pageCount = pageCount;
+        public void setOrder(int order) {
+            this.order = order;
         }
 
-        public int getSize() {
-            return size;
+        public int getParentChapterId() {
+            return parentChapterId;
         }
 
-        public void setSize(int size) {
-            this.size = size;
+        public void setParentChapterId(int parentChapterId) {
+            this.parentChapterId = parentChapterId;
         }
 
-        public int getTotal() {
-            return total;
+        public boolean isUserControlSetTop() {
+            return userControlSetTop;
         }
 
-        public void setTotal(int total) {
-            this.total = total;
+        public void setUserControlSetTop(boolean userControlSetTop) {
+            this.userControlSetTop = userControlSetTop;
         }
 
-        public List<DatasBean> getDatas() {
-            return datas;
+        public int getVisible() {
+            return visible;
         }
 
-        public void setDatas(List<DatasBean> datas) {
-            this.datas = datas;
+        public void setVisible(int visible) {
+            this.visible = visible;
         }
 
-        public static class DatasBean {
+        public List<ChildrenBean> getChildren() {
+            return children;
+        }
+
+        public void setChildren(List<ChildrenBean> children) {
+            this.children = children;
+        }
+
+        public static class ChildrenBean {
             /**
-             * apkLink :
-             * audit : 1
-             * author : 星星y
-             * chapterId : 486
-             * chapterName : LiveData
-             * collect : false
+             * children : []
              * courseId : 13
-             * desc :
-             * envelopePic :
-             * fresh : false
-             * id : 9104
-             * link : https://www.jianshu.com/p/34fb6ffaa684
-             * niceDate : 2019-09-09
-             * niceShareDate : 未知时间
-             * origin :
-             * prefix :
-             * projectLink :
-             * publishTime : 1568043858000
-             * shareDate : null
-             * shareUser :
-             * superChapterId : 423
-             * superChapterName : Jetpack
-             * tags : []
-             * title : LiveData+Retrofit网络请求实战
-             * type : 0
-             * userId : -1
+             * id : 60
+             * name : Android Studio相关
+             * order : 1000
+             * parentChapterId : 150
+             * userControlSetTop : false
              * visible : 1
-             * zan : 0
              */
 
-            private String apkLink;
-            private int audit;
-            private String author;
-            private int chapterId;
-            private String chapterName;
-            private boolean collect;
             private int courseId;
-            private String desc;
-            private String envelopePic;
-            private boolean fresh;
             private int id;
-            private String link;
-            private String niceDate;
-            private String niceShareDate;
-            private String origin;
-            private String prefix;
-            private String projectLink;
-            private long publishTime;
-            private Object shareDate;
-            private String shareUser;
-            private int superChapterId;
-            private String superChapterName;
-            private String title;
-            private int type;
-            private int userId;
+            private String name;
+            private int order;
+            private int parentChapterId;
+            private boolean userControlSetTop;
             private int visible;
-            private int zan;
-            private List<?> tags;
-
-            public String getApkLink() {
-                return apkLink;
-            }
-
-            public void setApkLink(String apkLink) {
-                this.apkLink = apkLink;
-            }
-
-            public int getAudit() {
-                return audit;
-            }
-
-            public void setAudit(int audit) {
-                this.audit = audit;
-            }
-
-            public String getAuthor() {
-                return author;
-            }
-
-            public void setAuthor(String author) {
-                this.author = author;
-            }
-
-            public int getChapterId() {
-                return chapterId;
-            }
-
-            public void setChapterId(int chapterId) {
-                this.chapterId = chapterId;
-            }
-
-            public String getChapterName() {
-                return chapterName;
-            }
-
-            public void setChapterName(String chapterName) {
-                this.chapterName = chapterName;
-            }
-
-            public boolean isCollect() {
-                return collect;
-            }
-
-            public void setCollect(boolean collect) {
-                this.collect = collect;
-            }
+            private List<?> children;
 
             public int getCourseId() {
                 return courseId;
@@ -245,30 +173,6 @@ public class SystemArticleBean {
 
             public void setCourseId(int courseId) {
                 this.courseId = courseId;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getEnvelopePic() {
-                return envelopePic;
-            }
-
-            public void setEnvelopePic(String envelopePic) {
-                this.envelopePic = envelopePic;
-            }
-
-            public boolean isFresh() {
-                return fresh;
-            }
-
-            public void setFresh(boolean fresh) {
-                this.fresh = fresh;
             }
 
             public int getId() {
@@ -279,116 +183,36 @@ public class SystemArticleBean {
                 this.id = id;
             }
 
-            public String getLink() {
-                return link;
+            public String getName() {
+                return name;
             }
 
-            public void setLink(String link) {
-                this.link = link;
+            public void setName(String name) {
+                this.name = name;
             }
 
-            public String getNiceDate() {
-                return niceDate;
+            public int getOrder() {
+                return order;
             }
 
-            public void setNiceDate(String niceDate) {
-                this.niceDate = niceDate;
+            public void setOrder(int order) {
+                this.order = order;
             }
 
-            public String getNiceShareDate() {
-                return niceShareDate;
+            public int getParentChapterId() {
+                return parentChapterId;
             }
 
-            public void setNiceShareDate(String niceShareDate) {
-                this.niceShareDate = niceShareDate;
+            public void setParentChapterId(int parentChapterId) {
+                this.parentChapterId = parentChapterId;
             }
 
-            public String getOrigin() {
-                return origin;
+            public boolean isUserControlSetTop() {
+                return userControlSetTop;
             }
 
-            public void setOrigin(String origin) {
-                this.origin = origin;
-            }
-
-            public String getPrefix() {
-                return prefix;
-            }
-
-            public void setPrefix(String prefix) {
-                this.prefix = prefix;
-            }
-
-            public String getProjectLink() {
-                return projectLink;
-            }
-
-            public void setProjectLink(String projectLink) {
-                this.projectLink = projectLink;
-            }
-
-            public long getPublishTime() {
-                return publishTime;
-            }
-
-            public void setPublishTime(long publishTime) {
-                this.publishTime = publishTime;
-            }
-
-            public Object getShareDate() {
-                return shareDate;
-            }
-
-            public void setShareDate(Object shareDate) {
-                this.shareDate = shareDate;
-            }
-
-            public String getShareUser() {
-                return shareUser;
-            }
-
-            public void setShareUser(String shareUser) {
-                this.shareUser = shareUser;
-            }
-
-            public int getSuperChapterId() {
-                return superChapterId;
-            }
-
-            public void setSuperChapterId(int superChapterId) {
-                this.superChapterId = superChapterId;
-            }
-
-            public String getSuperChapterName() {
-                return superChapterName;
-            }
-
-            public void setSuperChapterName(String superChapterName) {
-                this.superChapterName = superChapterName;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public int getType() {
-                return type;
-            }
-
-            public void setType(int type) {
-                this.type = type;
-            }
-
-            public int getUserId() {
-                return userId;
-            }
-
-            public void setUserId(int userId) {
-                this.userId = userId;
+            public void setUserControlSetTop(boolean userControlSetTop) {
+                this.userControlSetTop = userControlSetTop;
             }
 
             public int getVisible() {
@@ -399,20 +223,12 @@ public class SystemArticleBean {
                 this.visible = visible;
             }
 
-            public int getZan() {
-                return zan;
+            public List<?> getChildren() {
+                return children;
             }
 
-            public void setZan(int zan) {
-                this.zan = zan;
-            }
-
-            public List<?> getTags() {
-                return tags;
-            }
-
-            public void setTags(List<?> tags) {
-                this.tags = tags;
+            public void setChildren(List<?> children) {
+                this.children = children;
             }
         }
     }
