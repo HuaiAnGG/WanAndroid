@@ -1,5 +1,6 @@
 package org.huaiangg.wanandroid;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,15 +17,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.huaiangg.wanandroid.frags.home.HomeFragment;
 import org.huaiangg.wanandroid.frags.NavigationFragment;
 import org.huaiangg.wanandroid.frags.ProjectFragment;
+import org.huaiangg.wanandroid.frags.home.HomeFragment;
 import org.huaiangg.wanandroid.frags.system.SystemFragment;
 import org.huaiangg.wanandroid.utils.ToastUtil;
 
 /**
  * @author huaian
  */
+@SuppressLint("NewApi")
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         initView();
         // 设置监听事件
         initListener();
+//        SystemArticleBeanDao.createTable(, true);
     }
 
     /**

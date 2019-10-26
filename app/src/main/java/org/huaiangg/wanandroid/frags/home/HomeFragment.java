@@ -25,8 +25,8 @@ import com.youth.banner.listener.OnBannerListener;
 
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.activities.WebViewContextActivity;
-import org.huaiangg.wanandroid.frags.home.bean.BannerBean;
 import org.huaiangg.wanandroid.frags.home.adapter.HomeArticleAdapter;
+import org.huaiangg.wanandroid.frags.home.bean.BannerBean;
 import org.huaiangg.wanandroid.frags.home.bean.HomeArticleBean;
 import org.huaiangg.wanandroid.frags.home.loder.GlideImageLoder;
 import org.huaiangg.wanandroid.network.RetrofitUtil;

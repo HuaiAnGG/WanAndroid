@@ -4,7 +4,7 @@
             "outputFile": "E:\\AnsroidProject\\WanAndroid\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\huaian\\.gradle\\caches\\transforms-2\\files-2.1\\8df4fbf26770149a41553abf8ff1e303\\support-media-compat-28.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\huaian\\.gradle\\caches\\transforms-2\\files-2.1\\a2bda21ad73ab9e65200f5a809e71b89\\support-media-compat-28.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\huaian\\.gradle\\caches\\transforms-2\\files-2.1\\d5e3dbce73da937ac4fa5ed02d93e346\\appcompat-v7-28.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\huaian\\.gradle\\caches\\transforms-2\\files-2.1\\b2488396d3ca7e18682c8208a0da2e39\\appcompat-v7-28.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

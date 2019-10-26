@@ -13,14 +13,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import org.huaiangg.wanandroid.App;
 import org.huaiangg.wanandroid.R;
 import org.huaiangg.wanandroid.network.RetrofitUtil;
-import org.huaiangg.wanandroid.utils.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -47,11 +45,10 @@ public class SystemFragment extends Fragment {
 
     private ArrayAdapter<String> parentAdapter;
     private ArrayAdapter<String> childAdapter;
-//    private ArrayList<String> spinnerParentList = new ArrayList<String>();
-//    private ArrayList<String> spinnerChildList = new ArrayList<String>();
 
     private Map<String, Integer> spinnerParentMap = new HashMap<>();
     private Map<String, Integer> spinnerChildMap = new HashMap<>();
+    private App app = new App();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,12 +94,17 @@ public class SystemFragment extends Fragment {
                 .subscribe(new Observer<SystemArticleBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.e(TAG, "onComplete: 发起体系文章导航请求！" );
+                        Log.e(TAG, "onComplete: 发起体系文章导航请求！");
                     }
 
                     @Override
                     public void onNext(SystemArticleBean bean) {
                         Log.d(TAG, "onNext: " + bean.getData().toString());
+//                        try {
+//                            App.getSystemArticleBeanDaoSession().insert(bean);
+//                        }catch (Exception e) {
+//                            Log.e(TAG, "onNext: 数据库插入失败！", e);
+//                        }
                         int len = bean.getData().size();
                         for (int i = 0; i < len; i++) {
                             String parentName = bean.getData().get(i).getName();
@@ -141,7 +143,7 @@ public class SystemFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
-                        Log.e(TAG, "onComplete: 完成体系文章导航请求！" );
+                        Log.e(TAG, "onComplete: 完成体系文章导航请求！");
                         parentSpinner.setAdapter(parentAdapter);
                         childSpinner.setAdapter(childAdapter);
                     }
@@ -155,8 +157,10 @@ public class SystemFragment extends Fragment {
             = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-            ToastUtil.showShortToast(getContext(),
-                    "一级目录选中了 ：" + new ArrayList<>(spinnerParentMap.keySet()).get(pos));
+//            ToastUtil.showShortToast(getContext(), "一级目录选中了 ：" + new ArrayList<>
+//            (spinnerParentMap.keySet()).get(pos));
+            Log.d(TAG,
+                    "onItemSelected: " + "一级目录选中了 ：" + new ArrayList<>(spinnerParentMap.keySet()).get(pos));
         }
 
         @Override
@@ -172,8 +176,10 @@ public class SystemFragment extends Fragment {
             = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-            ToastUtil.showShortToast(getContext(),
-                    "二级目录选中了 ：" + new ArrayList<>(spinnerChildMap.keySet()).get(pos));
+//            ToastUtil.showShortToast(getContext(), "二级目录选中了 ：" + new ArrayList<>
+//            (spinnerChildMap.keySet()).get(pos));
+            Log.d(TAG,
+                    "onItemSelected: " + "二级目录选中了 ：" + new ArrayList<>(spinnerChildMap.keySet()).get(pos));
         }
 
         @Override

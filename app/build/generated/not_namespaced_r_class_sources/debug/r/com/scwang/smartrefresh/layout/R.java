@@ -97,8 +97,8 @@ public final class R {
     public static final class layout {
         private layout() {}
 
-        public static final int srl_classics_footer = 0x7f0b004a;
-        public static final int srl_classics_header = 0x7f0b004b;
+        public static final int srl_classics_footer = 0x7f0b004b;
+        public static final int srl_classics_header = 0x7f0b004c;
     }
     public static final class string {
         private string() {}

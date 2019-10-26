@@ -6600,12 +6600,13 @@ public final class R {
     public static final int notification_template_part_time=0x7f0b0044;
     public static final int rv_item_home_article=0x7f0b0045;
     public static final int rv_item_system=0x7f0b0046;
-    public static final int select_dialog_item_material=0x7f0b0047;
-    public static final int select_dialog_multichoice_material=0x7f0b0048;
-    public static final int select_dialog_singlechoice_material=0x7f0b0049;
-    public static final int srl_classics_footer=0x7f0b004a;
-    public static final int srl_classics_header=0x7f0b004b;
-    public static final int support_simple_spinner_dropdown_item=0x7f0b004c;
+    public static final int rv_item_system_article=0x7f0b0047;
+    public static final int select_dialog_item_material=0x7f0b0048;
+    public static final int select_dialog_multichoice_material=0x7f0b0049;
+    public static final int select_dialog_singlechoice_material=0x7f0b004a;
+    public static final int srl_classics_footer=0x7f0b004b;
+    public static final int srl_classics_header=0x7f0b004c;
+    public static final int support_simple_spinner_dropdown_item=0x7f0b004d;
   }
   public static final class menu {
     public static final int navigation_bottom_items=0x7f0c0000;

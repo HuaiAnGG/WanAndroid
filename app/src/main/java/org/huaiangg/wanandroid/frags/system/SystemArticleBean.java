@@ -1,10 +1,16 @@
 package org.huaiangg.wanandroid.frags.system;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.util.List;
 
 /**
  * @author huaian
  */
+@Entity(nameInDb = "system_article")
 public class SystemArticleBean {
 
 
@@ -31,7 +37,18 @@ public class SystemArticleBean {
 
     private int errorCode;
     private String errorMsg;
+    @Transient
     private List<DataBean> data;
+
+    @Generated(hash = 1524826108)
+    public SystemArticleBean(int errorCode, String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+    @Generated(hash = 852638282)
+    public SystemArticleBean() {
+    }
 
     public int getErrorCode() {
         return errorCode;
@@ -57,6 +74,7 @@ public class SystemArticleBean {
         this.data = data;
     }
 
+    @Entity
     public static class DataBean {
         /**
          * children : [{"children":[],"courseId":13,"id":60,"name":"Android Studio相关",
@@ -74,12 +92,14 @@ public class SystemArticleBean {
          */
 
         private int courseId;
+        @Id
         private int id;
         private String name;
         private int order;
         private int parentChapterId;
         private boolean userControlSetTop;
         private int visible;
+        @Transient
         private List<ChildrenBean> children;
 
         public int getCourseId() {
@@ -146,6 +166,7 @@ public class SystemArticleBean {
             this.children = children;
         }
 
+        @Entity
         public static class ChildrenBean {
             /**
              * children : []
@@ -159,12 +180,14 @@ public class SystemArticleBean {
              */
 
             private int courseId;
+            @Id
             private int id;
             private String name;
             private int order;
             private int parentChapterId;
             private boolean userControlSetTop;
             private int visible;
+            @Transient
             private List<?> children;
 
             public int getCourseId() {

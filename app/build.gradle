@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 28
@@ -26,10 +26,10 @@ android {
     greendao {
         //版本号，升级时可配置
         schemaVersion 1
-//        daoPackage 'org.huaiangg.wanandroid.database.greenDao.db'
-        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+        daoPackage 'org.huaiangg.wanandroid.db'
+        targetGenDir './src/main/java/'   //设置DaoMaster、DaoSession、Dao目录
         generateTests false //设置为true以自动生成单元测试。
-        targetGenDirTests 'src/main/java' //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
+        targetGenDirTests './src/main/java/'
     }
 }
 
@@ -65,7 +65,6 @@ dependencies {
     //没有使用特殊Header，可以不加这行
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-32'
 
-    // https://mvnrepository.com/artifact/org.greenrobot/greendao
-    implementation group: 'org.greenrobot', name: 'greendao', version: '3.2.2'
-
+    // add library
+    implementation 'org.greenrobot:greendao:3.2.2'
 }
